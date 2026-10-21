@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roomify — «трек из колонки в комнате»</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Roomify</h1>
+  <p class="sub">Превращает чистый трек в запись, как будто он играет из колонки в помещении или в машине:
+     ограниченная полоса динамика, лёгкое насыщение, ранние отражения и крошечное эхо. Без шумов.</p>
+</header>
+
+<main>
+  <section class="panel" id="filePanel">
+    <h2>Аудиофайл</h2>
+    <div id="drop" class="drop">
+      <input type="file" id="file" accept="audio/*">
+      <p>Перетащите трек сюда или выберите файл (wav, mp3, m4a, flac, ogg)</p>
+      <p class="meta" id="fileMeta">Файл не загружен</p>
+    </div>
+    <div class="row">
+      <button id="btnDownload" disabled>⬇ Скачать</button>
+      <select id="format" title="Формат скачиваемого файла"></select>
+    </div>
+
+    <div class="player" id="player" hidden>
+      <button id="btnPlay" disabled title="Старт / стоп">▶</button>
+      <div class="pbar">
+        <input type="range" id="seek" min="0" max="1000" value="0" step="1" title="Перемотка">
+        <div class="times"><span id="tCur">0:00</span><span id="tDur">0:00</span></div>
+      </div>
+    </div>
+
+    <div class="status" id="status"></div>
+  </section>
+
+  <section class="panel" id="presetPanel">
+    <h2>Наборы настроек</h2>
+    <div class="row">
+      <select id="presetSelect"></select>
+      <button id="btnDeletePreset" class="secondary danger">Удалить</button>
+    </div>
+    <p class="meta">Выбор из списка применяет набор к параметрам и сразу запускает обработку.
+       Свои наборы хранятся в профиле браузера (localStorage) и доступны при следующем запуске.</p>
+    <p class="meta" id="cacheMeta"></p>
+    <div class="row">
+      <button id="btnClearCache" class="secondary" disabled>Очистить кеш</button>
+    </div>
+  </section>
+
+  <section class="panel wide">
+    <h2>Параметры преобразования</h2>
+    <div class="row toolbar">
+      <button id="btnPreview" disabled>⚙ Обработать</button>
+      <input type="text" id="presetName" placeholder="Название набора">
+      <button id="btnSavePreset" class="secondary">Сохранить набор</button>
+      <button id="btnReset" class="secondary">Сбросить к умолчанию</button>
+    </div>
+    <div id="params"></div>
+  </section>
+</main>
+
+<script src="vendor/lame.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
